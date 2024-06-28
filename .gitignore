@@ -1,4 +1,6 @@
 node_modules
 dist
-gis
+gis/efeo-gis-pkks-public/
+gis/efeo-gis-pkks-public/*
+gis/efeo-gis-pkks-public.zip
 .DS_Store

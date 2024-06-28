@@ -29,8 +29,10 @@ import KML from 'ol/format/KML';
 import TileDebug from 'ol/source/TileDebug.js';
 
 // ***DEFINE SOME MAP CONSTANTS AND GLOBAL VARS AT THE OUTSET***
-const defaultmapcenter = [106, 4];
-const defaultmapstartzoom = 5;
+// const defaultmapcenter = [106, 4];
+// const defaultmapstartzoom = 5;
+const defaultmapcenter = [104.7, 13.4];
+const defaultmapstartzoom = 12;
 const mapmaxzoom = 18;
 const mapurl = 'http://'+ window.location.hostname + ":" + window.location.port
 var starturl = ''
@@ -275,8 +277,7 @@ const osmlayer = new TileLayer({
 // Archaeological maps layer
 const mapslayer = new TileLayer({
   source: new XYZ({
-    // url: "http://" + window.location.hostname + ":" + window.location.port + "/gis/maptiles/{z}/{x}/{-y}.png",
-    url: "./gis/maptiles/{z}/{x}/{y}.png",
+    url: "./gis/efeo-gis-pkks-public/maptiles/{z}/{x}/{y}.png",
   })
 });
 
@@ -290,8 +291,7 @@ const satlayer = new TileLayer({
 // Lidar hillshade layer
 const lidarlayer = new TileLayer({
   source: new XYZ({
-    // url: "http://"  + window.location.hostname + ":" + window.location.port + "/gis/hillshade/{z}/{x}/{y}.png",
-    url: "./gis/hillshade/{z}/{x}/{y}.png",
+    url: "./gis/efeo-gis-pkks-public/hillshade/{z}/{x}/{y}.png",
   })
 });
 
@@ -357,30 +357,38 @@ const layer = new VectorLayer({
 });
 map.addLayer(layer);
 
-navigator.geolocation.watchPosition(
-  function (pos) {
-    const coords = [pos.coords.longitude, pos.coords.latitude];
-    const accuracy = circular(coords, pos.coords.accuracy);
-    source.clear(true);
-    source.addFeatures([
-      new Feature(
-        accuracy.transform('EPSG:4326', map.getView().getProjection())
-      ),
-      new Feature(new Point(fromLonLat(coords))),
-    ]);
-  },
-  function (error) {
-    alert(`ERROR: ${error.message}`);
-  },
-  {
-    enableHighAccuracy: true,
-  }
-);
+let isTracking = false;
+function trackLocation() {
+  navigator.geolocation.watchPosition(
+    function (pos) {
+      const coords = [pos.coords.longitude, pos.coords.latitude];
+      const accuracy = circular(coords, pos.coords.accuracy);
+      source.clear(true);
+      source.addFeatures([
+        new Feature(
+          accuracy.transform('EPSG:4326', map.getView().getProjection())
+        ),
+        new Feature(new Point(fromLonLat(coords))),
+      ]);
+    },
+    function (error) {
+      alert(`ERROR: ${error.message}`);
+    },
+    {
+      enableHighAccuracy: true,
+    }
+  );
+}
 
 const locate = document.createElement('div');
 locate.className = 'ol-control ol-unselectable locate';
 locate.innerHTML = '<button title="Locate me"><span class="material-symbols-outlined">satellite_alt</span></button>';
+
 locate.addEventListener('click', function () {
+  if (!isTracking) {
+    trackLocation();
+    isTracking = true;
+  }
   if (!source.isEmpty()) {
     var currentzoom = map.getView().getZoom();
     map.getView().fit(source.getExtent(), {
