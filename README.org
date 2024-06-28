@@ -1,0 +1,10 @@
+* archweb_map (landform.space)
+
+- Basic openlayers js webapp on top of XYZ rasters
+
+** Running the webapplication
+
+#+begin_src 
+npm install
+npm start
+#+end_src
