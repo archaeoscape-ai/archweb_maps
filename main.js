@@ -276,7 +276,7 @@ const osmlayer = new TileLayer({
 const mapslayer = new TileLayer({
   source: new XYZ({
     // url: "http://" + window.location.hostname + ":" + window.location.port + "/gis/maptiles/{z}/{x}/{-y}.png",
-    url: "./gis/maptiles/{z}/{x}/{-y}.png",
+    url: "./gis/maptiles/{z}/{x}/{y}.png",
   })
 });
 
