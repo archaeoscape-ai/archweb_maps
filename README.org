@@ -5,13 +5,6 @@
 ** Running the webapplication
 
 #+begin_src bash
-# Install the local data
-# a) Either symlink to locally synced data
-ln -s ../../../../../../data/store_efeo/synced_manually/2024_06_27_webplatform/110_subset_pkks_xyz_tiles/efeo-gis-pkks-public gis/.
-# b) Or get the folder from humanum https://sharedocs.huma-num.fr/#/HOME/2024_06_28_share_webplatform/100_pkks_webplatform 
-mv ~/Downloads/efeo-gis-pkks-public.zip ./gis/.
-unzip ./gis/efeo-gis-pkks-public.zip  -d ./gis/
-
 # Install NPM packages and start the webserver
 npm install
 npm start
