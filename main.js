@@ -277,7 +277,9 @@ const osmlayer = new TileLayer({
 // Archaeological maps layer
 const mapslayer = new TileLayer({
   source: new XYZ({
-    url: "./gis/efeo-gis-pkks-public/maptiles/{z}/{x}/{y}.png",
+    // url: "./gis/efeo-gis-pkks-public/maptiles/{z}/{x}/{y}.png",
+    // url: "https://efeo-gis-pkks-public.ams3.cdn.digitaloceanspaces.com/maptiles/{z}/{x}/{y}.png",  // CDN address gives cookie error
+    url: "https://efeo-gis-pkks-public.ams3.digitaloceanspaces.com/maptiles/{z}/{x}/{y}.png", 
   })
 });
 
@@ -291,7 +293,9 @@ const satlayer = new TileLayer({
 // Lidar hillshade layer
 const lidarlayer = new TileLayer({
   source: new XYZ({
-    url: "./gis/efeo-gis-pkks-public/hillshade/{z}/{x}/{y}.png",
+    // url: "./gis/efeo-gis-pkks-public/hillshade/{z}/{x}/{y}.png",
+    // url: "https://efeo-gis-pkks-public.ams3.cdn.digitaloceanspaces.com/hillshade/{z}/{x}/{y}.png",
+    url: "https://efeo-gis-pkks-public.ams3.digitaloceanspaces.com/hillshade/{z}/{x}/{y}.png",
   })
 });
 

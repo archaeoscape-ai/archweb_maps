@@ -4,3 +4,4 @@ gis/efeo-gis-pkks-public/
 gis/efeo-gis-pkks-public/*
 gis/efeo-gis-pkks-public.zip
 .DS_Store
+*.swp
