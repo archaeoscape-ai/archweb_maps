@@ -1,6 +1,6 @@
 import path from 'path'
 export default {
-  base: "/archweb_maps/"
+  base: "/archweb_maps/",
   build: {
     sourcemap: true,
   },
